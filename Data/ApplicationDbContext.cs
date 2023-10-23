@@ -11,5 +11,12 @@ namespace address_book.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Contact> Contacts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Contact>()
+                .Property(c => c.Created)
+                .ValueGeneratedOnAdd();
+        }
     }
 }
